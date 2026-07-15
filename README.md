@@ -1,4 +1,4 @@
-# 🔧 Bhartiyaa Valves — Sales & Marketing Analytics | End-to-End Excel, SQL & Power BI Project
+# 🔧 Bhartiya Valves — Sales & Marketing Analytics | End-to-End Excel, SQL & Power BI Project
 
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
@@ -37,17 +37,32 @@ Raw data: [`/data`](./data) and [`/excel`](./excel) · Schema: [`/sql/01_schema_
 2. **MySQL** — Designed a 10-table normalized schema with 22 performance indexes, wrote 53 analytical queries across 4 tiers, 6 parameterized stored procedures, and 3 views feeding Power BI directly. See [`/sql`](./sql).
 3. **Power BI** — Star-schema data model (fact table joined to Customer, Product, and a custom Calendar table), 44 DAX measures (time intelligence, dynamic ranking with RANKX/TOPN, dip/recovery calculations), and 7 dashboard pages with cross-filtering and drill-through. See [`/powerbi`](./powerbi).
 
+## 📗 Excel Work — Where It All Started
+Before any SQL or Power BI, the entire analysis began in Excel with the raw company data:
+
+**Raw data tables (source):** Product, Raw Sales Data, Region, Customers
+
+**4 analysis workbooks built from that raw data:**
+| Workbook | What It Contains |
+|---|---|
+| **KPI Tracker** | 8 KPIs tracked monthly across the full 42-month span (Jan 2023 - Jun 2026), each with target, actual, achievement %, status, and month-over-month trend |
+| **Sales Analysis Workbook** | Regional revenue summary, salesperson performance leaderboard, monthly revenue trend, and top-customer leaderboard — all formula-driven (SUMIFS, COUNTIFS) |
+| **Marketing Analytics Workbook** | Customer segment analysis, product mix analysis, channel mix analysis, and payment/collections analysis |
+| **Sales Targets vs. Achievement** | Monthly target vs. actual tracking with automated Met/Missed/On Track status flags, at both company-wide and regional level |
+
+Only after all 4 workbooks were built and the data was fully cleaned did the raw tables get exported to **10 CSV files** and loaded into MySQL for the next stage. See [`/excel`](./excel) for all 8 files (4 raw/master + 4 analysis workbooks).
+
 ## 🔄 Data Flow / Architecture
 Click the image to view full size.
 
-[![Data Flow Architecture](./powerbi/dataflow_architecture.png)](./powerbi/dataflow_architecture.png)
+[![Data Flow Architecture](./images/dataflow_architecture.png)](./images/dataflow_architecture.png)
 
-Excel (raw data + 7 workbooks) → 10 CSV files → MySQL (10 tables, 22 indexes) → SQL analysis (53 queries, 6 procedures, 3 views) → Power BI (44 DAX measures) → 7 interactive dashboard pages.
+Excel (raw data + 4 analysis workbooks) → 10 CSV files → MySQL (10 tables, 22 indexes) → SQL analysis (53 queries, 6 procedures, 3 views) → Power BI (44 DAX measures) → 7 interactive dashboard pages.
 
 ## 🧩 Data Model / Star Schema
 Confirmed directly from the Power BI Model view. Click the image to view full size.
 
-[![Power BI Model Schema](./powerbi/screenshots/power_bi_model_schema.png)](./powerbi/screenshots/power_bi_model_schema.png)
+[![Power BI Model Schema](./images/power_bi_model_schema.png)](./images/power_bi_model_schema.png)
 
 `raw_sales_data` (fact, 1,03,842 rows) → `product_catalogue` (1) on `Product_ID` · → `customer_master` (1) on `Customer_ID` · → `Calendar` (1) on `Date`
 
@@ -55,49 +70,49 @@ Confirmed directly from the Power BI Model view. Click the image to view full si
 All 7 pages below — click any image to open the full-size screenshot.
 
 ### 1. Executive Summary
-[![Executive Summary](./powerbi/screenshots/01_executive_summary.png)](./powerbi/screenshots/01_executive_summary.png)
+[![Executive Summary](./images/01_executive_summary.png)](./images/01_executive_summary.png)
 
 **Key Insights:**
 - Total NET Revenue: **₹77.39 Cr** | Transactions: **1,03,842** | Unique Customers: **150** | Units Sold: **14.80L**
 - Top 3 regions (Delhi NCR, Haryana, Uttar Pradesh) account for **71%** of total revenue.
 
 ### 2. Regional Performance
-[![Regional Performance](./powerbi/screenshots/02_regional_performance.png)](./powerbi/screenshots/02_regional_performance.png)
+[![Regional Performance](./images/02_regional_performance.png)](./images/02_regional_performance.png)
 
 **Key Insights:**
 - **Delhi NCR** alone drives **38.0%** of revenue (₹29.4 Cr).
 - **Haryana (18.0%)** and **Uttar Pradesh (15.0%)** follow as the next-largest markets.
 
 ### 3. Product Analysis
-[![Product Analysis](./powerbi/screenshots/03_product_analysis.png)](./powerbi/screenshots/03_product_analysis.png)
+[![Product Analysis](./images/03_product_analysis.png)](./images/03_product_analysis.png)
 
 **Key Insights:**
 - **Industrial Valves** dominate at **78.5%** of revenue across 8 SKUs.
 - **Medical Valves (14.3%)** and **Fire Fighting Valves (6.1%)** make up the rest of the mix.
 
 ### 4. Customer & Salesperson Dashboard
-[![Customer & Salesperson Dashboard](./powerbi/screenshots/04_customer_salesperson.png)](./powerbi/screenshots/04_customer_salesperson.png)
+[![Customer & Salesperson Dashboard](./images/04_customer_salesperson.png)](./images/04_customer_salesperson.png)
 
 **Key Insights:**
 - 15 salespeople tracked; the **top 3** handle **~48%** of all transactions.
 - Customer value segmented by Pricing_Tier and Annual_Purchase_Value_INR.
 
 ### 5. Marketing Analytics: Extended Reach
-[![Extended Reach](./powerbi/screenshots/05_extended_reach.png)](./powerbi/screenshots/05_extended_reach.png)
+[![Extended Reach](./images/05_extended_reach.png)](./images/05_extended_reach.png)
 
 **Key Insights:**
 - Tracks expansion into Gujarat, Maharashtra, and Telangana as "extended reach" markets.
 - Includes port-dispatch analysis for Mundra and Kandla/Gandhidham.
 
 ### 6. Dip Analysis 2024
-[![Dip Analysis 2024](./powerbi/screenshots/06_dip_analysis_2024.png)](./powerbi/screenshots/06_dip_analysis_2024.png)
+[![Dip Analysis 2024](./images/06_dip_analysis_2024.png)](./images/06_dip_analysis_2024.png)
 
 **Key Insights:**
 - Isolates the **May-September 2024** revenue dip by region, product, and salesperson.
 - Most salespeople show a **5-13% YoY decline** in 2024 vs. 2023.
 
 ### 7. Recovery and Recommendations
-[![Recovery and Recommendations](./powerbi/screenshots/07_recovery_recommendations.png)](./powerbi/screenshots/07_recovery_recommendations.png)
+[![Recovery and Recommendations](./images/07_recovery_recommendations.png)](./images/07_recovery_recommendations.png)
 
 **Key Insights:**
 - Quantifies the 2025 recovery against the 2024 dip, region by region.
