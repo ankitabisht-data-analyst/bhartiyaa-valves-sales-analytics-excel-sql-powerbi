@@ -1,229 +1,135 @@
-# Bhartiya Valves — Sales & Marketing Analytics (Excel → SQL → Power BI)
+# 🔧 Bhartiya Valves — Sales & Marketing Analytics | End-to-End Excel, SQL & Power BI Project
 
-End-to-end data analytics project built during a Sales & Marketing Analytics internship at **Bhartiya Valves (P) Ltd.**, a Faridabad-based (Est. 1989) manufacturer of high-pressure brass gas cylinder valves. Full pipeline from raw transactional data to a 7-page interactive Power BI dashboard, covering 3.5 years of business — including a real revenue dip investigated end-to-end, from root cause to recovery.
+[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Excel](https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/excel)
 
-> Also completed as part of the B.Tech CSE curriculum at Echelon Institute of Technology, Faridabad (affiliated to J.C. Bose University of Science & Technology).
+## 📌 Project Overview
+End-to-end **Sales & Marketing Analytics** solution built with **Excel, MySQL, and Power BI** during an internship at Bhartiya Valves (P) Ltd., a Faridabad-based manufacturer of high-pressure gas cylinder valves (Est. 1989). Analyzes **1,03,842 transactions** spanning 3.5 years (Jan 2023 - Jun 2026) — from raw data cleaning through a 10-table MySQL database to a 7-page interactive Power BI dashboard with 44 DAX measures.
 
-## Project Scale
+**Goal:** Give management full visibility into revenue drivers, regional performance, target achievement, and — most importantly — trace a real 2024 revenue dip back to its root cause and quantify the 2025 recovery.
 
-| Metric | Value |
-|---|---|
-| Transactions analyzed | 1,03,842 |
-| Time span | 3.5 years (Jan 2023 - Jun 2026) |
-| Database tables | 10 (normalized, primary/foreign-key linked) |
-| Performance indexes | 22 |
-| SQL analytical queries | 53 |
-| Stored procedures | 6 |
-| SQL views | 3 |
-| DAX measures | 44 |
-| Dashboard pages | 7 |
+## 🎯 Business Problem
+Bhartiya Valves needed clear, drillable visibility into its sales performance to support pricing, sales-team, and regional-expansion decisions. This project answers:
+- Which regions and products drive the most revenue, and where is growth slowing?
+- Are salespeople hitting their monthly/quarterly targets, and by how much?
+- What does the customer base look like by segment, pricing tier, and order value?
+- Which delivery channels and payment methods are most used, and what's the outstanding collection rate?
+- **What caused the May-September 2024 revenue dip, and what changed in the 2025 recovery?**
 
-## The Business Story
+## 🗂️ Dataset
+10 relational tables, created in a MySQL database (`bhartiya_valves`) and joined on `Customer_ID`, `Product_ID`, and `Region`:
 
-Bhartiya Valves saw a sharp revenue dip between May-September 2024. This project traces that dip end-to-end: from raw transaction data, through SQL root-cause analysis (which region, which product, which customer segment was hit hardest), to a quantified 2025 recovery — the same pipeline a company's internal BI team would build to answer "what happened, and what do we do about it."
+| Table | Description | Rows | Key Fields |
+|---|---|---|---|
+| `raw_sales_data` | Transaction-level fact table | 1,03,842 | Transaction_ID, Date, Customer_ID, Product_ID, Net_Amount_INR, Region |
+| `customer_master` | Customer demographic & credit profile | 150 | Customer_ID, Customer_Type, City, Region, Pricing_Tier, Credit_Limit_INR |
+| `product_catalogue` | Product SKU details | 12 | Product_ID, Product_Category, Body_Material, Avg_Selling_Price_INR |
+| `region_master` | Region-level rollups | 8 | Region_ID, State_Covered, Total_NET_Revenue_INR |
+| `region_salesperson_map`, `region_city_map`, `region_deliverymode_map` | Bridge tables | 18 / 39 / 24 | Region_ID + mapped dimension |
+| `sales_targets_monthly`, `sales_targets_region` | Target vs. actual tracking | 42 / 32 | Target_INR, Actual_INR, Achievement_Pct |
+| `kpi_dashboard` | 8 KPIs x 42 months | 336 | KPI_Name, Target, Actual, Status, MoM_Trend |
 
-## Dashboards
+Raw data: [`/data`](./data) and [`/excel`](./excel) · Schema: [`/sql/01_schema_creation.sql`](./sql/01_schema_creation.sql)
 
-Click any heading below to jump straight to that dashboard's full-size image.
+## 🛠️ Tech Stack & Process
+1. **Excel** — Raw sales ledger cleaned and analyzed across 8 workbooks: data cleaning (text-formatted dates, duplicate customers), EDA, and 4 purpose-built analysis workbooks (KPI Tracker, Sales Analysis, Marketing Analytics, Targets vs. Achievement). See [`/excel`](./excel).
+2. **MySQL** — Designed a 10-table normalized schema with 22 performance indexes, wrote 53 analytical queries across 4 tiers, 6 parameterized stored procedures, and 3 views feeding Power BI directly. See [`/sql`](./sql).
+3. **Power BI** — Star-schema data model (fact table joined to Customer, Product, and a custom Calendar table), 44 DAX measures (time intelligence, dynamic ranking with RANKX/TOPN, dip/recovery calculations), and 7 dashboard pages with cross-filtering and drill-through. See [`/powerbi`](./powerbi).
 
-### [1. Executive Summary](./powerbi/screenshots/01_executive_summary.png)
+## 🔄 Data Flow / Architecture
+Click the image to view full size.
+
+[![Data Flow Architecture](./powerbi/dataflow_architecture.png)](./powerbi/dataflow_architecture.png)
+
+Excel (raw data + 7 workbooks) → 10 CSV files → MySQL (10 tables, 22 indexes) → SQL analysis (53 queries, 6 procedures, 3 views) → Power BI (44 DAX measures) → 7 interactive dashboard pages.
+
+## 🧩 Data Model / Star Schema
+Confirmed directly from the Power BI Model view. Click the image to view full size.
+
+[![Power BI Model Schema](./powerbi/screenshots/power_bi_model_schema.png)](./powerbi/screenshots/power_bi_model_schema.png)
+
+`raw_sales_data` (fact, 1,03,842 rows) → `product_catalogue` (1) on `Product_ID` · → `customer_master` (1) on `Customer_ID` · → `Calendar` (1) on `Date`
+
+## 📈 Dashboards
+All 7 pages below — click any image to open the full-size screenshot.
+
+### 1. Executive Summary
 [![Executive Summary](./powerbi/screenshots/01_executive_summary.png)](./powerbi/screenshots/01_executive_summary.png)
 
-### [2. Regional Performance](./powerbi/screenshots/02_regional_performance.png)
+**Key Insights:**
+- Total NET Revenue: **₹77.39 Cr** | Transactions: **1,03,842** | Unique Customers: **150** | Units Sold: **14.80L**
+- Top 3 regions (Delhi NCR, Haryana, Uttar Pradesh) account for **71%** of total revenue.
+
+### 2. Regional Performance
 [![Regional Performance](./powerbi/screenshots/02_regional_performance.png)](./powerbi/screenshots/02_regional_performance.png)
 
-### [3. Product Analysis](./powerbi/screenshots/03_product_analysis.png)
+**Key Insights:**
+- **Delhi NCR** alone drives **38.0%** of revenue (₹29.4 Cr).
+- **Haryana (18.0%)** and **Uttar Pradesh (15.0%)** follow as the next-largest markets.
+
+### 3. Product Analysis
 [![Product Analysis](./powerbi/screenshots/03_product_analysis.png)](./powerbi/screenshots/03_product_analysis.png)
 
-### [4. Customer & Salesperson Dashboard](./powerbi/screenshots/04_customer_salesperson.png)
+**Key Insights:**
+- **Industrial Valves** dominate at **78.5%** of revenue across 8 SKUs.
+- **Medical Valves (14.3%)** and **Fire Fighting Valves (6.1%)** make up the rest of the mix.
+
+### 4. Customer & Salesperson Dashboard
 [![Customer & Salesperson Dashboard](./powerbi/screenshots/04_customer_salesperson.png)](./powerbi/screenshots/04_customer_salesperson.png)
 
-### [5. Marketing Analytics: Extended Reach](./powerbi/screenshots/05_extended_reach.png)
+**Key Insights:**
+- 15 salespeople tracked; the **top 3** handle **~48%** of all transactions.
+- Customer value segmented by Pricing_Tier and Annual_Purchase_Value_INR.
+
+### 5. Marketing Analytics: Extended Reach
 [![Extended Reach](./powerbi/screenshots/05_extended_reach.png)](./powerbi/screenshots/05_extended_reach.png)
 
-### [6. Dip Analysis 2024](./powerbi/screenshots/06_dip_analysis_2024.png)
+**Key Insights:**
+- Tracks expansion into Gujarat, Maharashtra, and Telangana as "extended reach" markets.
+- Includes port-dispatch analysis for Mundra and Kandla/Gandhidham.
+
+### 6. Dip Analysis 2024
 [![Dip Analysis 2024](./powerbi/screenshots/06_dip_analysis_2024.png)](./powerbi/screenshots/06_dip_analysis_2024.png)
 
-### [7. Recovery and Recommendations](./powerbi/screenshots/07_recovery_recommendations.png)
+**Key Insights:**
+- Isolates the **May-September 2024** revenue dip by region, product, and salesperson.
+- Most salespeople show a **5-13% YoY decline** in 2024 vs. 2023.
+
+### 7. Recovery and Recommendations
 [![Recovery and Recommendations](./powerbi/screenshots/07_recovery_recommendations.png)](./powerbi/screenshots/07_recovery_recommendations.png)
 
-### Power BI Model Schema
-[![Power BI Model Schema](./powerbi/screenshots/power_bi_model_schema.png)](./powerbi/screenshots/power_bi_model_schema.png)
+**Key Insights:**
+- Quantifies the 2025 recovery against the 2024 dip, region by region.
+- Closes with prioritized, data-backed recommendations for management.
 
 Full Power BI file: [`powerbi/BHARTIYA_VALVES_PROJECT.pbix`](./powerbi/BHARTIYA_VALVES_PROJECT.pbix) · All 44 DAX formulas: [`powerbi/DAX_measures.md`](./powerbi/DAX_measures.md)
 
-## Raw Data & Workbooks
-
-Click any item below to jump straight to that file or folder.
-
-| Data | Link |
-|---|---|
-| Raw sales data (Excel) | [`excel/Raw_Sales_Data.xlsx`](./excel/Raw_Sales_Data.xlsx) |
-| Raw sales data (CSV, MySQL-import-ready) | [`data/sales/raw_sales_data.csv.gz`](./data/sales/raw_sales_data.csv.gz) |
-| KPI Tracker workbook | [`excel/KPI_Tracker.xlsx`](./excel/KPI_Tracker.xlsx) |
-| Sales Analysis workbook | [`excel/Sales_Analysis_Workbook.xlsx`](./excel/Sales_Analysis_Workbook.xlsx) |
-| Marketing Analytics workbook | [`excel/Marketing_Analytics_Workbook.xlsx`](./excel/Marketing_Analytics_Workbook.xlsx) |
-| Sales Targets vs. Achievement workbook | [`excel/Sales_Targets_vs_Achievement.xlsx`](./excel/Sales_Targets_vs_Achievement.xlsx) |
-| Customer Master | [`excel/Customer_Master.xlsx`](./excel/Customer_Master.xlsx) · [`data/master/customer_master.csv`](./data/master/customer_master.csv) |
-| Product Master | [`excel/Product_Master.xlsx`](./excel/Product_Master.xlsx) · [`data/master/product_catalogue.csv`](./data/master/product_catalogue.csv) |
-| Region Master | [`excel/Region_Master.xlsx`](./excel/Region_Master.xlsx) · [`data/master/region_master.csv`](./data/master/region_master.csv) |
-| All 10 SQL-import CSVs | [`data/master/`](./data/master/) and [`data/sales/`](./data/sales/) |
-| Dataflow architecture diagram | [`powerbi/dataflow_architecture.png`](./powerbi/dataflow_architecture.png) |
-
-## Architecture
-
-```mermaid
-flowchart LR
-    A[Raw Sales Data 103,842 rows] --> B[Excel: Cleaning, EDA, 7 Workbooks]
-    B --> C[10 CSV Files]
-    C --> D[MySQL: 10 Tables, 22 Indexes]
-    D --> E[SQL: 53 Queries, 6 Procedures, 3 Views]
-    E --> F[Power BI: 44 DAX Measures]
-    F --> G[7 Interactive Dashboard Pages]
+## 🚀 How to Use This Project
+```bash
+git clone https://github.com/ankitabisht-data-analyst/bhartiyaa-valves-sales-analytics-excel-sql-powerbi.git
 ```
+1. Create a MySQL database named `bhartiya_valves` and run [`sql/01_schema_creation.sql`](./sql/01_schema_creation.sql) to create all 10 tables (this also loads data via `LOAD DATA LOCAL INFILE` from `/data`).
+2. Run [`sql/02_indexes.sql`](./sql/02_indexes.sql) to add the 22 performance indexes.
+3. Run [`sql/03_analysis_queries.sql`](./sql/03_analysis_queries.sql) and [`sql/04_procedures_and_views.sql`](./sql/04_procedures_and_views.sql) to build out the analysis layer, procedures, and views.
+4. Open [`powerbi/BHARTIYA_VALVES_PROJECT.pbix`](./powerbi/BHARTIYA_VALVES_PROJECT.pbix) in Power BI Desktop and refresh the data source to point to your local MySQL connection.
 
-**Pipeline stages:**
-1. **Excel** — raw sales ledger cleaned and analyzed across 7 formula-driven workbooks (KPI Tracker, Sales Analysis, Marketing Analytics, Targets vs. Achievement, plus Customer/Product/Region masters). See [`excel/`](./excel/).
-2. **MySQL** — 10-table normalized schema loaded from CSV, 22 performance indexes, 53 analytical queries across 4 tiers (Basic -> Intermediate -> Advanced window functions -> Dip & Recovery analysis), 6 parameterized stored procedures, 3 views feeding Power BI directly. See [`sql/`](./sql/).
-3. **Power BI** — star-schema model, 44 DAX measures (time intelligence, dynamic ranking, dip/recovery calculations), 7 dashboard pages. See [`powerbi/`](./powerbi/).
-
-## Data Model
-
-MySQL database with **10 tables**: one transactional fact table, three core dimensions, three bridge/mapping tables, and three pre-aggregated reporting tables (targets and KPIs). Full DDL in [`sql/01_schema_creation.sql`](./sql/01_schema_creation.sql).
-
-```mermaid
-erDiagram
-    raw_sales_data ||--o{ customer_master : Customer_ID
-    raw_sales_data ||--o{ product_catalogue : Product_ID
-    raw_sales_data ||--o{ region_master : Region
-
-    raw_sales_data {
-        string Transaction_ID
-        date Date
-        string Customer_ID
-        string Product_ID
-        string Region
-        int Quantity_Sold
-        float Net_Amount_INR
-        float Total_Invoice_Amount_INR
-        string Payment_Status
-        string Delivery_Mode
-    }
-    customer_master {
-        string Customer_ID
-        string Customer_Name
-        string Customer_Type
-        string City
-        string Region
-        string Pricing_Tier
-    }
-    product_catalogue {
-        string Product_ID
-        string Product_Name
-        string Product_Category
-        string Inlet_Thread_Size
-        string Body_Material
-    }
-    region_master {
-        string Region_ID
-        string Region_Name
-        string State_Covered
-        int Assigned_SP_Count
-    }
-```
-
-**Core star schema (fact + 3 dimensions):** `raw_sales_data` (fact, 103,842 rows) joins to `customer_master`, `product_catalogue`, and `region_master`.
-
-**Bridge tables:** `region_salesperson_map`, `region_city_map`, `region_deliverymode_map`.
-
-**Pre-aggregated reporting tables** (feed the KPI Tracker and Targets vs. Achievement dashboards): `kpi_dashboard`, `sales_targets_monthly`, `sales_targets_region`.
-
-**Power BI model:** loads 9 core tables (customer_master, product_catalogue, raw_sales_data, kpi_dashboard, sales_targets_monthly, the 3 SQL views, plus a custom Calendar date table). Confirmed from the actual Model view ([`powerbi/screenshots/power_bi_model_schema.png`](./powerbi/screenshots/power_bi_model_schema.png)):
-
-- `raw_sales_data` (*) → `product_catalogue` (1) on `Product_ID`
-- `raw_sales_data` (*) → `customer_master` (1) on `Customer_ID`
-- `raw_sales_data` (*) → `Calendar` (1) on `Date`
-
-This is the real star schema: one fact table, three dimension relationships (Product, Customer, and Date/Calendar), which is what powers all the time-intelligence DAX measures (`SAMEPERIODLASTYEAR`, year-over-year comparisons, etc).
-
-## SQL Layer
-
-| File | Contents |
-|---|---|
-| [`01_schema_creation.sql`](./sql/01_schema_creation.sql) | All 10 `CREATE TABLE` statements + `LOAD DATA INFILE` for all 10 CSVs |
-| [`02_indexes.sql`](./sql/02_indexes.sql) | 22 performance indexes, each commented with the query pattern it supports |
-| [`03_analysis_queries.sql`](./sql/03_analysis_queries.sql) | 53 queries: Section A (8 basic), B (20 intermediate — joins, pivots), C (15 advanced — window functions, CTEs, RANK/ROLLUP), D (10 — dip timeline, root cause, 2025 recovery, management recommendations) |
-| [`04_procedures_and_views.sql`](./sql/04_procedures_and_views.sql) | 6 stored procedures (`GetRevenueByRegion`, `GetTopNCustomers`, `GetSalespersonScorecard`, `GetDipAnalysis`, `GetProductPerformance`, `GetPaymentCollectionReport`) + 3 views (`vw_monthly_revenue_summary`, `vw_customer_360`, `vw_region_product_summary`) |
-
-## Skills Demonstrated
-
-| Area | What Was Done |
-|---|---|
-| Data Modeling | 10-table normalized schema, PK/FK relationships, 22 performance indexes |
-| SQL | Window functions, CTEs, RANK/DENSE_RANK, ROLLUP, correlated subqueries |
-| Automation | 6 parameterized stored procedures for repeatable reporting |
-| BI Engineering | 3 SQL views feeding Power BI directly — no manual refresh needed |
-| DAX | Time intelligence (`SAMEPERIODLASTYEAR`), dynamic ranking (`RANKX`/`TOPN`) |
-| Debugging | 6 real bugs found and fixed during development (below) |
-
-## Data Cleaning & Debugging Highlights
-
-Real issues found and fixed while building the pipeline:
-
+## 🐞 Data Cleaning & Debugging Highlights
 | Issue | Root Cause | Fix |
 |---|---|---|
 | `YEAR()` / date formulas failing | Dates stored as text, not true Excel dates | Reformatted `Date` column to proper datetime |
 | 42-59 duplicate customer names | Same customer entered under multiple `Customer_ID`s | Deduplicated by ranking on `Customer_ID` |
-| Power BI showing a "(Blank)" product category | `PRD-012` (Spindle Keys & Spares) missing from `Product_Master` | Added missing product dimension row |
-| Haryana cities (Rohtak, Panipat, Karnal) excluded from NCR | Incorrect manual region mapping | Corrected using the official NCR Planning Board 14-district list |
-| Power BI TOPN/SUMMARIZE measures not responding to year slicer | Static ranking logic | Rebuilt with `ADDCOLUMNS` + `RANKX` |
-| Achievement Rate % showing 9496% instead of ~95% | Percentage value multiplied twice (once in the measure, once in formatting) | Removed duplicate `*100` |
+| Power BI showing a "(Blank)" product category | `PRD-012` missing from `Product_Master` | Added missing product dimension row |
+| Haryana cities excluded from NCR | Incorrect manual region mapping | Corrected using the official NCR Planning Board 14-district list |
+| TOPN/SUMMARIZE measures not responding to year slicer | Static ranking logic | Rebuilt with `ADDCOLUMNS` + `RANKX` |
+| Achievement Rate % showing 9496% instead of ~95% | Percentage multiplied twice | Removed duplicate `*100` |
 
-## Key Findings
+## 📈 Skills Demonstrated
+`Excel` `Advanced Formulas` `MySQL` `Data Modeling` `Star Schema` `Stored Procedures` `SQL Views` `Window Functions` `DAX` `Power BI` `Data Cleaning` `ETL` `Data Visualization` `Business Analytics` `Dashboard Design` `KPI Reporting`
 
-*(Net revenue, ex-GST, Jan 2023 - Jun 2026)*
+## 🤖 AI-Assisted Workflow
+Every data model, SQL query, DAX formula, and business insight in this project is mine. AI was used deliberately for debugging (e.g. the RANKX slicer fix, the double-multiplication % bug), documentation, and cross-checking SQL output against Excel formulas — knowing when and how to use AI without letting it replace analytical judgment is part of how I work.
 
-- **Total net revenue:** Rs 77.39 crore across 103,842 transactions and 1,479,676 units sold.
-- **Regional concentration:** Delhi NCR alone drives 38.0% of revenue, followed by Haryana (18.0%) and Uttar Pradesh (15.0%) — the top 3 regions account for 71% of total revenue.
-- **Product mix:** Industrial Valves dominate at 78.5% of revenue, with Medical Valves at 14.3% and Fire Fighting Valves at 6.1%.
-- **Sales team:** 15 salespeople; the top 3 together handle ~48% of all transactions.
-- **2024 dip:** A documented May-September 2024 revenue dip, traced to its root cause and quantified through 2025 recovery — full investigation in `sql/03_analysis_queries.sql` Section D.
-- **Target achievement:** Monthly and regional targets tracked with automated Met/Missed/On Track status flags.
-
-## AI-Assisted Workflow (Used as a Tool, Not a Crutch)
-
-Every data model, SQL query, DAX formula, and business insight in this project is mine. AI was used deliberately for:
-- Debugging (e.g. tracing the RANKX slicer bug, the double-multiplication percentage bug)
-- Documentation generation (this README, the DAX reference doc)
-- Cross-checking SQL output against Excel formulas for accuracy
-
-Knowing when and how to use AI, without letting it replace analytical judgment, is part of how I work.
-
-## Repo Structure
-
-```
-├── data/
-│   ├── master/          # 9 dimension/bridge/reporting tables, MySQL-import-ready CSVs
-│   └── sales/            # Fact table - 103,842-row transaction ledger (gzip)
-├── excel/                 # 8 original workbooks (raw data + 7 analysis workbooks)
-├── sql/                    # Schema, indexes, 53 queries, 6 procedures + 3 views
-├── powerbi/               # .pbix file, DAX measure docs, dashboard screenshots
-└── README.md
-```
-
-## Tech Stack
-
-`Excel (Advanced formulas, PivotTables)` - `MySQL / MySQL Workbench (joins, views, stored procedures, indexing)` - `Power BI Desktop (star schema, DAX)`
-
-## Business Questions Answered
-
-- Which regions and products drive the most revenue, and where is growth slowing?
-- Are salespeople hitting their monthly/quarterly targets, and by how much?
-- What does the customer base look like by segment, pricing tier, and order value?
-- Which delivery channels and payment methods are most used, and what's the collection rate on outstanding payments?
-- What caused the 2024 revenue dip, and what changed in the 2025 recovery?
-
-## Author
-
-**Ankita Bisht** — B.Tech CSE, Echelon Institute of Technology, Faridabad
-[LinkedIn](https://linkedin.com/in/ankita-bisht09) - [GitHub](https://github.com/ankitabisht-data-analyst)
+## 📬 Contact
+**Ankita Bisht** — Data Analyst
+[LinkedIn](https://www.linkedin.com/in/ankita-bisht09) · [GitHub](https://github.com/ankitabisht-data-analyst)
