@@ -14,4 +14,3 @@
 
 ## Views
 `vw_monthly_revenue_summary` (monthly revenue vs. target, tagged Dip/Recovery/Normal period) - `vw_customer_360` (full customer profile with year-wise revenue, value band, activity status) - `vw_region_product_summary` (region x product performance)
-
