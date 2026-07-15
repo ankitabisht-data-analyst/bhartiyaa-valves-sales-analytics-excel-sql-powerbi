@@ -1,4 +1,4 @@
-# 🔧 Bhartiya Valves — Sales & Marketing Analytics | End-to-End Excel, SQL & Power BI Project
+# 🔧 Bhartiyaa Valves — Sales & Marketing Analytics | End-to-End Excel, SQL & Power BI Project
 
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
