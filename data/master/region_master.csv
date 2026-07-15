@@ -1,0 +1,9 @@
+Region_ID,Region_Name,State_Covered,Total_Customers,Total_Transactions,Total_NET_Revenue_INR,Revenue_Share_Pct,Assigned_SP_Count
+RGN-01,Delhi NCR,Delhi NCR (Multi-state),55,49692,294087543.46,0.3799865576029516,3
+RGN-02,Haryana,Haryana,20,7566,139318610.14,0.1800117014623801,3
+RGN-03,Uttar Pradesh,Uttar Pradesh,25,15384,116091929.18,0.1500008195369005,3
+RGN-04,Punjab,Punjab,18,11424,85137004.69,0.1100043781391224,3
+RGN-05,Rajasthan,Rajasthan,12,8298,61903479.27,0.07998465257897724,3
+RGN-06,Gujarat (Extended Reach),Gujarat,10,6012,42566067.02,0.05499904241889893,1
+RGN-07,Maharashtra (Extended Reach),Maharashtra,5,3198,22456047.31,0.02901515655611753,1
+RGN-08,Telangana (Extended Reach),Telangana,5,2268,12381284.97,0.01599769170465178,1

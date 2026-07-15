@@ -1,0 +1,40 @@
+Region_ID,Region_Name,City_Name,State,Total_Transactions_in_City
+RGN-01,Delhi NCR,New Delhi,Delhi NCR,3818
+RGN-01,Delhi NCR,Noida,Uttar Pradesh (NCR),3871
+RGN-01,Delhi NCR,Ghaziabad,Uttar Pradesh (NCR),4002
+RGN-01,Delhi NCR,Faridabad,Haryana (NCR),3840
+RGN-01,Delhi NCR,Gurugram,Haryana (NCR),3806
+RGN-01,Delhi NCR,Greater Noida,Uttar Pradesh (NCR),3925
+RGN-01,Delhi NCR,Bahadurgarh,Haryana (NCR),3728
+RGN-01,Delhi NCR,Sonipat,Haryana (NCR),3736
+RGN-01,Delhi NCR,Panipat,Haryana (NCR),3767
+RGN-01,Delhi NCR,Rohtak,Haryana (NCR),3829
+RGN-01,Delhi NCR,Karnal,Haryana (NCR),3947
+RGN-01,Delhi NCR,Palwal,Haryana (NCR),3713
+RGN-01,Delhi NCR,Manesar,Haryana (NCR),3710
+RGN-02,Haryana,Hisar,Haryana,3739
+RGN-02,Haryana,Ambala,Haryana,3827
+RGN-03,Uttar Pradesh,Kanpur,Uttar Pradesh,2543
+RGN-03,Uttar Pradesh,Muradabad,Uttar Pradesh,2566
+RGN-03,Uttar Pradesh,Lucknow,Uttar Pradesh,2551
+RGN-03,Uttar Pradesh,Agra,Uttar Pradesh,2544
+RGN-03,Uttar Pradesh,Meerut,Uttar Pradesh,2549
+RGN-03,Uttar Pradesh,Varanasi,Uttar Pradesh,2631
+RGN-04,Punjab,Ludhiana,Punjab,2891
+RGN-04,Punjab,Amritsar,Punjab,2765
+RGN-04,Punjab,Jalandhar,Punjab,2871
+RGN-04,Punjab,Patiala,Punjab,2897
+RGN-05,Rajasthan,Jaipur,Rajasthan,2135
+RGN-05,Rajasthan,Jodhpur,Rajasthan,2056
+RGN-05,Rajasthan,Kota,Rajasthan,2092
+RGN-05,Rajasthan,Udaipur,Rajasthan,2015
+RGN-06,Gujarat (Extended Reach),Mundra,Gujarat,1242
+RGN-06,Gujarat (Extended Reach),Gandhidham,Gujarat,1223
+RGN-06,Gujarat (Extended Reach),Kandla,Gujarat,1133
+RGN-06,Gujarat (Extended Reach),Ahmedabad,Gujarat,1200
+RGN-06,Gujarat (Extended Reach),Surat,Gujarat,1214
+RGN-07,Maharashtra (Extended Reach),Mumbai,Maharashtra,1071
+RGN-07,Maharashtra (Extended Reach),Pune,Maharashtra,1056
+RGN-07,Maharashtra (Extended Reach),Nagpur,Maharashtra,1071
+RGN-08,Telangana (Extended Reach),Hyderabad,Telangana,1051
+RGN-08,Telangana (Extended Reach),Secunderabad,Telangana,1217

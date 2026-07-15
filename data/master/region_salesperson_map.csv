@@ -1,0 +1,19 @@
+Region_ID,Region_Name,Salesperson_ID,Salesperson_Name,Total_Transactions,Total_NET_Revenue_INR
+RGN-01,Delhi NCR,SP-01,Rajesh Kumar,16544,98179977.25999999
+RGN-01,Delhi NCR,SP-02,Amit Sharma,16378,96694068.36
+RGN-01,Delhi NCR,SP-03,Priya Verma,16770,99213497.84
+RGN-02,Haryana,SP-04,Sunil Gupta,2483,46045684.16
+RGN-02,Haryana,SP-05,Meena Joshi,2536,46289682.9
+RGN-02,Haryana,SP-06,Harinder Singh,2547,46983243.08
+RGN-03,Uttar Pradesh,SP-07,Deepak Singh,5146,38788164.42
+RGN-03,Uttar Pradesh,SP-08,Rohit Yadav,5173,39018177.58000001
+RGN-03,Uttar Pradesh,SP-09,Sunita Chauhan,5065,38285587.18
+RGN-04,Punjab,SP-10,Gurpreet Kaur,3799,28445006.58
+RGN-04,Punjab,SP-11,Mandeep Singh,3875,28769183.49
+RGN-04,Punjab,SP-12,Vikram Bhatia,3750,27922814.62
+RGN-05,Rajasthan,SP-13,Kavita Patel,2812,21084994.38
+RGN-05,Rajasthan,SP-14,Ramesh Sharma,2778,20713720.7
+RGN-05,Rajasthan,SP-15,Anjali Mehta,2708,20104764.19
+RGN-06,Gujarat (Extended Reach),SP-01,Rajesh Kumar,6012,42566067.02
+RGN-07,Maharashtra (Extended Reach),SP-01,Rajesh Kumar,3198,22456047.31
+RGN-08,Telangana (Extended Reach),SP-01,Rajesh Kumar,2268,12381284.97

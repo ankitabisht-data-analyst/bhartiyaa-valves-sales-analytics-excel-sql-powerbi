@@ -1,0 +1,25 @@
+Region_ID,Region_Name,Delivery_Mode,Mode_Type,Is_Active,Total_Transactions_via_Mode
+RGN-01,Delhi NCR,Direct Delivery,Road,Yes,19873
+RGN-01,Delhi NCR,Through Dealer,Dealer Network,Yes,14931
+RGN-01,Delhi NCR,Courier,Third-party Courier,Yes,9955
+RGN-01,Delhi NCR,Self Pickup,Factory Pickup,Yes,4933
+RGN-02,Haryana,Direct Delivery,Road,Yes,3000
+RGN-02,Haryana,Through Dealer,Dealer Network,Yes,2288
+RGN-02,Haryana,Courier,Third-party Courier,Yes,1531
+RGN-02,Haryana,Self Pickup,Factory Pickup,Yes,747
+RGN-03,Uttar Pradesh,Direct Delivery,Road,Yes,5420
+RGN-03,Uttar Pradesh,Through Dealer,Dealer Network,Yes,5357
+RGN-03,Uttar Pradesh,Courier,Third-party Courier,Yes,3089
+RGN-03,Uttar Pradesh,Self Pickup,Factory Pickup,Yes,1518
+RGN-04,Punjab,Direct Delivery,Road,Yes,3955
+RGN-04,Punjab,Through Dealer,Dealer Network,Yes,4078
+RGN-04,Punjab,Courier,Third-party Courier,Yes,2253
+RGN-04,Punjab,Self Pickup,Factory Pickup,Yes,1138
+RGN-05,Rajasthan,Direct Delivery,Road,Yes,3300
+RGN-05,Rajasthan,Through Dealer,Dealer Network,Yes,3331
+RGN-05,Rajasthan,Courier,Third-party Courier,Yes,1667
+RGN-06,Gujarat (Extended Reach),Port Dispatch (Mundra),Sea Port,Yes,3539
+RGN-06,Gujarat (Extended Reach),Port Dispatch (Kandla Gandhidham),Sea Port,Yes,0
+RGN-07,Maharashtra (Extended Reach),Port Dispatch (Mundra),Sea Port,Yes,3198
+RGN-08,Telangana (Extended Reach),Direct Delivery,Road,Yes,1361
+RGN-08,Telangana (Extended Reach),Courier,Third-party Courier,Yes,907
